@@ -19,16 +19,6 @@ from django.shortcuts import get_object_or_404, render
 class StudentsListView(ListCreateAPIView):
     queryset = StudentsModel.objects.all()
     serializer_class = StudentsSerializer
-    def perform_create(self, serializer):
-        data = self.request.data
-        data
-
-        # make some changes to self.request here
-
-        serializer.save(
-                #change some things here
-                field='some new value'
-            )
 
 
         
