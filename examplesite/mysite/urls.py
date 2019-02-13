@@ -27,9 +27,9 @@ from myapp import views
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('students/', views.StudentsList.as_view()),
-    path('schools/', views.SchoolsList.as_view()),
-    path('schools/<int:pk>/', views.StudentDetail.as_view()),
-    path('students/<int:pk>/', views.StudentDetail.as_view())
+    path('students/', views.StudentsListView.as_view()),
+    path('schools/', views.SchoolsListView.as_view()),
+    path('schools/<int:pk>/', views.SchoolDetailsView.as_view()),
+    path('students/<int:pk>/', views.StudentDetailView.as_view())
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
