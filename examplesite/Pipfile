@@ -12,6 +12,7 @@ psycopg2 = "*"
 djangorestframework = "*"
 gunicorn = "*"
 django-heroku = "*"
+drf-nested-routers = "*"
 
 [requires]
 python_version = "3.7"

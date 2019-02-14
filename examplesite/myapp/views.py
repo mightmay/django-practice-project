@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from myapp.models import SchoolsModel, StudentsModel
 from rest_framework import viewsets
-from myapp.serializers import StudentsSerializer, SchoolsSerializer
+from myapp.serializers import StudentsSerializer, SchoolsSerializer,StudentNestedViewSetSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -38,3 +38,7 @@ class SchoolDetailsView(RetrieveUpdateDestroyAPIView):
     queryset = SchoolsModel.objects.all()
     serializer_class = SchoolsSerializer
     
+class StudentNestedViewSet(viewsets.ModelViewSet):
+    serializer_class = StudentNestedViewSetSerializer
+    def get_queryset(self):
+        return StudentsModel.objects.filter(school=self.kwargs['schools_pk'])

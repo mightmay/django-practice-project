@@ -12,3 +12,7 @@ class SchoolsSerializer(serializers.ModelSerializer):
         model = SchoolsModel
         fields = ('school_name', 'num_max_students')
 
+class StudentNestedViewSetSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = StudentsModel
+            fields = ('first_name', 'last_name','student_identification_string', 'school')

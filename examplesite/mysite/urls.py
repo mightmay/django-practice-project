@@ -17,19 +17,28 @@ from django.contrib import admin
 from django.urls import path
 
 from django.urls import include, path
-from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from myapp import views
+from rest_framework_nested import routers
 
+router = routers.SimpleRouter()
+router.register(r'schools', views.SchoolsListView)
 
-
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
+domains_router = routers.NestedSimpleRouter(router, r'schools', lookup='schools')
+domains_router.register(r'students', views.StudentNestedViewSet, base_name='schools-students')
+# 'base_name' is optional. Needed only if the same viewset is registered more than once
+ 
 urlpatterns = [
     path('students/', views.StudentsListView.as_view()),
     path('schools/', views.SchoolsListView.as_view()),
     path('schools/<int:pk>/', views.SchoolDetailsView.as_view()),
     path('students/<int:pk>/', views.StudentDetailView.as_view())
 ]
+
+
+
+
+    
 urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns += domains_router.urls
